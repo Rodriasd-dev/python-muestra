@@ -5,16 +5,21 @@ from collections import Counter
 with open('archive/muestra.csv', 'r', encoding='utf-8') as file:
     lector = csv.reader(file, delimiter=',', quotechar='"')
     data = []
-    next(lector)  # Saltar la primera fila si contiene encabezados
+    next(lector)
     for row in lector:
         data.append(row)
 
-animes = [row[5] for row in data]  # Obtener solo los nombres de los animes
+animes = [row[5] for row in data]  
 
 def obtener_frecuencia_absoluta(lista_de_animes):
     frecuencia_absoluta = Counter(lista_de_animes)
     return frecuencia_absoluta
 
-frecuencia_absoluta_animes = obtener_frecuencia_absoluta(animes)
+fi = obtener_frecuencia_absoluta(animes)
 
-print(frecuencia_absoluta_animes)
+filter_fi = {}
+for clave,valor in fi.items():
+    if valor > 8:
+        filter_fi[clave] = valor
+
+print(filter_fi)
