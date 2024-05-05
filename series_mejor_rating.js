@@ -1,0 +1,26 @@
+//Series con puntuacin mayor a 8.8
+const series_mejor_rating =[
+        {'anime': "Frieren: Beyond Journey's End", 'score': 9.38}, 
+        {'anime': 'Fullmetal Alchemist: Brotherhood', 'score': 9.09}, 
+        {'anime': 'Steins;Gate', 'score': 9.07}, 
+        {'anime': 'Gintama Season 4', 'score': 9.06}, 
+        {'anime': 'Attack on Titan Season 3 Part 2', 'score': 9.05}, 
+        {'anime': 'Gintama Season 2', 'score': 9.03}, 
+        {'anime': 'Bleach: Thousand-Year Blood War', 'score': 9.02}, 
+        {'anime': 'Gintama: Enchousen', 'score': 9.02}, 
+        {'anime': 'Kaguya-sama: Love is War - Ultra Romantic', 'score': 9.01}, 
+        {'anime': 'Fruits Basket: The Final Season', 'score': 8.98}, 
+        {'anime': 'Gintama Season 5', 'score': 8.98}, 
+        {'anime': 'Gintama', 'score': 8.94}, 
+        {'anime': 'Clannad: After Story', 'score': 8.93}, 
+        {'anime': 'The Apothecary Diaries', 'score': 8.92}, 
+        {'anime': 'March Comes In Like a Lion 2nd Season', 'score': 8.92}, 
+        {'anime': 'Code Geass: Lelouch of the Rebellion R2', 'score': 8.91}, 
+        {'anime': 'The Dangers in My Heart Season 2', 'score': 8.89}, 
+        {'anime': 'Gintama.: Silver Soul Arc - Second Half War', 'score': 8.88}, 
+        {'anime': 'Monster', 'score': 8.88}, 
+        {'anime': 'Jujutsu Kaisen Season 2', 'score': 8.84}, 
+        {'anime': 'Kingdom: Season 3', 'score': 8.82}, 
+        {'anime': 'Vinland Saga Season 2', 'score': 8.81}, 
+        {'anime': 'Gintama.: Silver Soul Arc', 'score': 8.81}
+    ]
