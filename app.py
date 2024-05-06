@@ -26,6 +26,11 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
 
     }
 
+    series_peliculas_popularity={
+        "series": 0,
+        "peliculas": 0
+    }
+
     for row in lector_csv:
         if row[0] != 'Score':
             if row[8] == 'TV':
@@ -37,6 +42,8 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
                 else:
                     animes_series_genero[row[18]] = animes_series_genero.get(row[18], 0) + float(row[0])
                     series_contador[row[18]] = series_contador.get(row[18], 0) + 1
+
+                series_peliculas_popularity["series"] = series_peliculas_popularity["series"] + float(row[1])
             
             if row[8] == 'Movie':
                 animes_peliculas[row[7]] = float(row[0])
@@ -47,52 +54,58 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
                 else:
                     peliculas_contador[row[18]] = peliculas_contador.get(row[18], 0) + 1
                     animes_peliculas_genero[row[18]] = animes_peliculas_genero.get(row[18], 0) + float(row[0])
+                
+                series_peliculas_popularity["peliculas"] = series_peliculas_popularity["peliculas"] + float(row[1])
 
+print(series_peliculas_popularity)
+# promedio_peliculas = {}
+# promedio_series = {}
 
-promedio_peliculas = {}
-promedio_series = {}
+# for clave,valor in animes_series_genero.items():
+#     promedio_series[clave] = valor / series_contador[clave]
 
-for clave,valor in animes_series_genero.items():
-    promedio_series[clave] = valor / series_contador[clave]
-
-for clave, valor in animes_peliculas_genero.items():
-    promedio_peliculas[clave] = valor / peliculas_contador[clave]
-
-
-
-df_promedio_peliculas = pd.DataFrame({"genero": promedio_peliculas.keys(), "score": promedio_peliculas.values()})
-df_promedio_series = pd.DataFrame({"genero": promedio_series.keys(), "score": promedio_series.values()})
-dfSeries = pd.DataFrame({"anime": animes_series.keys(), "score": animes_series.values()})
-dfPeliculas = pd.DataFrame({"anime": animes_peliculas.keys(),"score": animes_peliculas.values()})
-
-
-peliculas_mejor_promedio = df_promedio_peliculas[(df_promedio_peliculas["score"] > 8.5)]
-series_mejor_promedio = df_promedio_series[(df_promedio_series["score"] > 8.5)]
-peliculas_mejor_rating = dfPeliculas[(dfPeliculas["score"] > 8.5)]
-series_mejor_rating = dfSeries[(dfSeries["score"] > 8.8)]
+# for clave, valor in animes_peliculas_genero.items():
+#     promedio_peliculas[clave] = valor / peliculas_contador[clave]
 
 
 
-pmp = peliculas_mejor_promedio.to_dict(orient="records")
-smp = series_mejor_promedio.to_dict(orient="records")
-smr = series_mejor_rating.to_dict(orient="records")
-pmr = peliculas_mejor_rating.to_dict(orient="records") 
-
-variable_pmp = "const genero_peliculas_promedio =" + repr(pmp)
-variable_smp = "const genero_series_promedio =" + repr(smp)
-variable_pmr = "peliculas_mejor_rating = " + repr(pmr)
-variable_smr = "series_mejor_rating =" + repr(smr)
+# df_promedio_peliculas = pd.DataFrame({"genero": promedio_peliculas.keys(), "score": promedio_peliculas.values()})
+# df_promedio_series = pd.DataFrame({"genero": promedio_series.keys(), "score": promedio_series.values()})
+# dfSeries = pd.DataFrame({"anime": animes_series.keys(), "score": animes_series.values()})
+# dfPeliculas = pd.DataFrame({"anime": animes_peliculas.keys(),"score": animes_peliculas.values()})
 
 
-with open("peliculas_mejor_promedio.js", "w", encoding="utf-8") as f:
-    f.write(variable_pmp)
-
-with open("series_mejor_promedio.js", "w", encoding="utf-8") as f:
-    f.write(variable_smp)
-
-with open("peliculas_mejor_rating.py", "w", encoding="utf-8") as f:
-     f.write(variable_pmr)
+# peliculas_mejor_promedio = df_promedio_peliculas[(df_promedio_peliculas["score"] > 8.5)]
+# series_mejor_promedio = df_promedio_series[(df_promedio_series["score"] > 8.5)]
+# peliculas_mejor_rating = dfPeliculas[(dfPeliculas["score"] > 8.5)]
+# series_mejor_rating = dfSeries[(dfSeries["score"] > 8.8)]
 
 
-with open("series_mejor_rating.py", "w", encoding="utf-8") as f:
-    f.write(variable_smr)
+
+# pmp = peliculas_mejor_promedio.to_dict(orient="records")
+# smp = series_mejor_promedio.to_dict(orient="records")
+# smr = series_mejor_rating.to_dict(orient="records")
+# pmr = peliculas_mejor_rating.to_dict(orient="records") 
+
+# variable_pmp = "const genero_peliculas_promedio =" + repr(pmp)
+# variable_smp = "const genero_series_promedio =" + repr(smp)
+# variable_pmr = "peliculas_mejor_rating = " + repr(pmr)
+# variable_smr = "series_mejor_rating =" + repr(smr)
+variable_psp = "const peliculas_series_popularidad = " + repr(series_peliculas_popularity)
+
+
+with open("peliculas_series_popularidad.js", "w", encoding="utf-8") as f:
+    f.write(variable_psp)
+
+# with open("peliculas_mejor_promedio.js", "w", encoding="utf-8") as f:
+#     f.write(variable_pmp)
+
+# with open("series_mejor_promedio.js", "w", encoding="utf-8") as f:
+#     f.write(variable_smp)
+
+# with open("peliculas_mejor_rating.py", "w", encoding="utf-8") as f:
+#      f.write(variable_pmr)
+
+
+# with open("series_mejor_rating.py", "w", encoding="utf-8") as f:
+#     f.write(variable_smr)
