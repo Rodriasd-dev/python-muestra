@@ -4,6 +4,8 @@ import csv
 
 with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo:
     lector_csv= csv.reader(archivo, delimiter=',', quotechar='"')
+    
+    animes = {}
     animes_series = {
 
     }
@@ -41,6 +43,7 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
 
     for row in lector_csv:
         if row[0] != 'Score':
+            animes[row[7]] = row[2]
             if row[8] == 'TV':
                 animes_series[row[7]]= float(row[0])
 
@@ -68,16 +71,27 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
                 estudio_contador[row[16]] = estudio_contador.get(row[16], 0) + 1
 
 
+print(animes)
+
+df_animes = pd.DataFrame({"anime": animes.keys(), "popularidad": animes.values()})
+df_animes = df_animes.sort_values(by='popularidad', ascending=False)
+df_anime_dic = df_animes.to_dict(orient="records")
+
+animes_populares = "const animes_populares= " + repr(df_anime_dic)
+
+
+with open("animes_populares.js", "w", encoding="utf-8") as f:
+    f.write(animes_populares)
+
 # estudio_promedio_popularidad = {}
 # for clave, valor in estudios_popularidad.items():
 #     estudio_promedio_popularidad[clave] = estudios_popularidad[clave] / estudio_contador[clave]
 
-df_estudio_popularidad = pd.DataFrame({"estudios": estudios_popularidad.keys(), "popularidad": estudios_popularidad.values()})
+# df_estudio_popularidad = pd.DataFrame({"estudios": estudios_popularidad.keys(), "popularidad": estudios_popularidad.values()})
 
-df_estudio_popularidad = df_estudio_popularidad.sort_values(by='popularidad', ascending=False)
-dic_estudio_popularidad = df_estudio_popularidad.to_dict(orient="records")
+# df_estudio_popularidad = df_estudio_popularidad.sort_values(by='popularidad', ascending=False)
+# dic_estudio_popularidad = df_estudio_popularidad.to_dict(orient="records")
 
-print(dic_estudio_popularidad)
 
 # promedio_peliculas = {}
 # promedio_series = {}
@@ -112,11 +126,12 @@ print(dic_estudio_popularidad)
 # variable_smp = "const genero_series_promedio =" + repr(smp)
 # variable_pmr = "peliculas_mejor_rating = " + repr(pmr)
 # variable_smr = "series_mejor_rating =" + repr(smr)
-variable_psp = "const peliculas_series_popularidad = " + repr(series_peliculas_popularity)
+
+# variable_psp = "const peliculas_series_popularidad = " + repr(series_peliculas_popularity)
 
 
-with open("peliculas_series_popularidad.js", "w", encoding="utf-8") as f:
-    f.write(variable_psp)
+# with open("peliculas_series_popularidad.js", "w", encoding="utf-8") as f:
+#     f.write(variable_psp)
 
 # with open("peliculas_mejor_promedio.js", "w", encoding="utf-8") as f:
 #     f.write(variable_pmp)
