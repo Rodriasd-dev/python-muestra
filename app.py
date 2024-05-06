@@ -68,19 +68,23 @@ df_promedio_series = pd.DataFrame({"genero": promedio_series.keys(), "score": pr
 
 
 
-
+peliculas_mejor_promedio = df_promedio_peliculas[(df_promedio_peliculas["score"] > 8.5)]
+series_mejor_promedio = df_promedio_series[(df_promedio_peliculas['score'] > 8.5)]
 # peliculas_mejor_rating = dfPeliculas[(dfPeliculas["score"] > 8.5)]
 # series_mejor_rating = dfSeries[(dfSeries["score"] > 8.8)]
 
 
 
-
+pmp = peliculas_mejor_promedio.to_dict(orient="records")
+smp = series_mejor_promedio.to_dict(orient="records")
 # smr = series_mejor_rating.to_dict(orient="records")
 # pmr = peliculas_mejor_rating.to_dict(orient="records") 
 
-
+variable_pmp = "const genero_peliculas_promedio =" + repr(pmp)
+variable_smp = "const genero_series_promedio =" + repr(smp)
 # variable_pmr = "peliculas_mejor_rating = " + repr(pmr)
 # variable_smr = "series_mejor_rating =" + repr(smr)
+
 
 # with open("peliculas_mejor_rating.py", "w", encoding="utf-8") as f:
 #      f.write(variable_pmr)
