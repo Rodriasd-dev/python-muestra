@@ -31,6 +31,14 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
         "peliculas": 0
     }
 
+    estudios_popularidad = {
+        
+    }
+
+    estudio_contador = {
+
+    }        
+
     for row in lector_csv:
         if row[0] != 'Score':
             if row[8] == 'TV':
@@ -56,8 +64,21 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
                     animes_peliculas_genero[row[18]] = animes_peliculas_genero.get(row[18], 0) + float(row[0])
                 
                 series_peliculas_popularity["peliculas"] = series_peliculas_popularity["peliculas"] + float(row[1])
+                estudios_popularidad[row[16]] = estudios_popularidad.get(row[16], 0) + float(row[1])
+                estudio_contador[row[16]] = estudio_contador.get(row[16], 0) + 1
 
-print(series_peliculas_popularity)
+
+# estudio_promedio_popularidad = {}
+# for clave, valor in estudios_popularidad.items():
+#     estudio_promedio_popularidad[clave] = estudios_popularidad[clave] / estudio_contador[clave]
+
+df_estudio_popularidad = pd.DataFrame({"estudios": estudios_popularidad.keys(), "popularidad": estudios_popularidad.values()})
+
+df_estudio_popularidad = df_estudio_popularidad.sort_values(by='popularidad', ascending=False)
+dic_estudio_popularidad = df_estudio_popularidad.to_dict(orient="records")
+
+print(dic_estudio_popularidad)
+
 # promedio_peliculas = {}
 # promedio_series = {}
 
