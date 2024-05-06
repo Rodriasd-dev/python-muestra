@@ -15,15 +15,15 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
     animes_series_genero={
 
     }
-    series_promedio = {
+    series_contador = {
 
     }
 
     animes_peliculas_genero={
 
     }
-    peliculas_promedio = {
-        
+    peliculas_contador = {
+
     }
 
     for row in lector_csv:
@@ -33,22 +33,36 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
 
                 if row[18] not in animes_peliculas_genero:
                     animes_series_genero[row[18]] = float(row[0])
+                    series_contador[row[18]] = 1
                 else:
                     animes_series_genero[row[18]] = animes_series_genero.get(row[18], 0) + float(row[0])
+                    series_contador[row[18]] = series_contador.get(row[18], 0) + 1
             
             if row[8] == 'Movie':
                 animes_peliculas[row[7]] = float(row[0])
 
                 if row[18] not in animes_peliculas_genero:
                     animes_peliculas_genero[row[18]] = float(row[0])
+                    peliculas_contador[row[18]] = 1
                 else:
+                    peliculas_contador[row[18]] = peliculas_contador.get(row[18], 0) + 1
                     animes_peliculas_genero[row[18]] = animes_peliculas_genero.get(row[18], 0) + float(row[0])
 
-print(animes_peliculas_genero)  
-print(animes_series_genero) 
+
+promedio_peliculas = {}
+promedio_series = {}
+
+for clave,valor in animes_series_genero.items():
+    promedio_series[clave] = valor / series_contador[clave]
+
+for clave, valor in animes_peliculas_genero.items():
+    promedio_peliculas[clave] = valor / peliculas_contador[clave]
+
+print(promedio_peliculas)
 
 
-
+df_promedio_peliculas = pd.DataFrame({"genero": promedio_peliculas.keys(), "score": promedio_peliculas.values()})
+df_promedio_series = pd.DataFrame({"genero": promedio_series.keys(), "score": promedio_series.values()})
 # dfSeries = pd.DataFrame({"anime": animes_series.keys(), "score": animes_series.values()})
 # dfPeliculas = pd.DataFrame({"anime": animes_peliculas.keys(),"score": animes_peliculas.values()})
 
