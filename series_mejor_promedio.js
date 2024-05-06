@@ -1,0 +1,22 @@
+const genero_series_promedio =[
+    {'genero': 'Drama, Sci-Fi, Suspense', 'score': 8.53}, 
+    {'genero': 'Action, Comedy, Sci-Fi', 'score': 8.787500000000001}, 
+    {'genero': 'Drama, Mystery', 'score': 8.92}, 
+    {'genero': 'Action, Award Winning, Drama, Sci-Fi', 'score': 8.7}, 
+    {'genero': 'Drama, Mystery, Suspense', 'score': 8.88}, 
+    {'genero': 'Comedy, Mystery, Romance, Supernatural', 'score': 8.76}, 
+    {'genero': 'Action, Award Winning, Sci-Fi', 'score': 8.75}, 
+    {'genero': 'Adventure, Mystery, Slice of LifeSlice of Life, Supernatural', 'score': 8.66}, 
+    {'genero': 'Award Winning, Drama, Mystery, Suspense', 'score': 8.67}, 
+    {'genero': 'Award Winning, Drama, Supernatural', 'score': 8.67}, 
+    {'genero': 'Adventure, Drama, FantasyFantasy, Mystery, Sci-Fi', 'score': 8.64}, 
+    {'genero': 'Action, Adventure, Award Winning, Sci-Fi', 'score': 8.63}, 
+    {'genero': 'Supernatural, Suspense', 'score': 8.62}, 
+    {'genero': 'Award Winning, Drama, SportsSports', 'score': 8.62}, 
+    {'genero': 'Award Winning, Comedy, Mystery, Romance, Suspense', 'score': 8.56}, 
+    {'genero': 'Action, Award Winning, Drama, Suspense', 'score': 8.55}, 
+    {'genero': 'Action, Award Winning, Comedy', 'score': 8.53}, 
+    {'genero': 'Adventure, Comedy, Drama', 'score': 8.52}, 
+    {'genero': 'Adventure, FantasyFantasy', 'score': 8.51}, 
+    {'genero': 'Action, Adventure, Comedy', 'score': 8.51}
+]

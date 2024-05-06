@@ -58,37 +58,41 @@ for clave,valor in animes_series_genero.items():
 for clave, valor in animes_peliculas_genero.items():
     promedio_peliculas[clave] = valor / peliculas_contador[clave]
 
-print(promedio_peliculas)
 
 
 df_promedio_peliculas = pd.DataFrame({"genero": promedio_peliculas.keys(), "score": promedio_peliculas.values()})
 df_promedio_series = pd.DataFrame({"genero": promedio_series.keys(), "score": promedio_series.values()})
-# dfSeries = pd.DataFrame({"anime": animes_series.keys(), "score": animes_series.values()})
-# dfPeliculas = pd.DataFrame({"anime": animes_peliculas.keys(),"score": animes_peliculas.values()})
-
+dfSeries = pd.DataFrame({"anime": animes_series.keys(), "score": animes_series.values()})
+dfPeliculas = pd.DataFrame({"anime": animes_peliculas.keys(),"score": animes_peliculas.values()})
 
 
 peliculas_mejor_promedio = df_promedio_peliculas[(df_promedio_peliculas["score"] > 8.5)]
-series_mejor_promedio = df_promedio_series[(df_promedio_peliculas['score'] > 8.5)]
-# peliculas_mejor_rating = dfPeliculas[(dfPeliculas["score"] > 8.5)]
-# series_mejor_rating = dfSeries[(dfSeries["score"] > 8.8)]
+series_mejor_promedio = df_promedio_series[(df_promedio_series["score"] > 8.5)]
+peliculas_mejor_rating = dfPeliculas[(dfPeliculas["score"] > 8.5)]
+series_mejor_rating = dfSeries[(dfSeries["score"] > 8.8)]
 
 
 
 pmp = peliculas_mejor_promedio.to_dict(orient="records")
 smp = series_mejor_promedio.to_dict(orient="records")
-# smr = series_mejor_rating.to_dict(orient="records")
-# pmr = peliculas_mejor_rating.to_dict(orient="records") 
+smr = series_mejor_rating.to_dict(orient="records")
+pmr = peliculas_mejor_rating.to_dict(orient="records") 
 
 variable_pmp = "const genero_peliculas_promedio =" + repr(pmp)
 variable_smp = "const genero_series_promedio =" + repr(smp)
-# variable_pmr = "peliculas_mejor_rating = " + repr(pmr)
-# variable_smr = "series_mejor_rating =" + repr(smr)
+variable_pmr = "peliculas_mejor_rating = " + repr(pmr)
+variable_smr = "series_mejor_rating =" + repr(smr)
 
 
-# with open("peliculas_mejor_rating.py", "w", encoding="utf-8") as f:
-#      f.write(variable_pmr)
+with open("peliculas_mejor_promedio.js", "w", encoding="utf-8") as f:
+    f.write(variable_pmp)
+
+with open("series_mejor_promedio.js", "w", encoding="utf-8") as f:
+    f.write(variable_smp)
+
+with open("peliculas_mejor_rating.py", "w", encoding="utf-8") as f:
+     f.write(variable_pmr)
 
 
-# with open("series_mejor_rating.py", "w", encoding="utf-8") as f:
-#     f.write(variable_smr)
+with open("series_mejor_rating.py", "w", encoding="utf-8") as f:
+    f.write(variable_smr)
