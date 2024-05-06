@@ -43,7 +43,7 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
 
     for row in lector_csv:
         if row[0] != 'Score':
-            animes[row[7]] = row[2]
+            animes[row[7]] = float(row[2])
             if row[8] == 'TV':
                 animes_series[row[7]]= float(row[0])
 
@@ -73,15 +73,15 @@ with open('archive/Top_Anime_data.csv', newline='' ,encoding="utf-8") as archivo
 
 print(animes)
 
-df_animes = pd.DataFrame({"anime": animes.keys(), "popularidad": animes.values()})
-df_animes = df_animes.sort_values(by='popularidad', ascending=False)
+df_animes = pd.DataFrame({"anime": animes.keys(), "rank": animes.values()})
+df_animes = df_animes[(df_animes["rank"] < 11)]
 df_anime_dic = df_animes.to_dict(orient="records")
 
-animes_populares = "const animes_populares= " + repr(df_anime_dic)
+animes_ranking = "const animes_populares= " + repr(df_anime_dic)
 
 
-with open("animes_populares.js", "w", encoding="utf-8") as f:
-    f.write(animes_populares)
+with open("animes_ranking.js", "w", encoding="utf-8") as f:
+    f.write(animes_ranking)
 
 # estudio_promedio_popularidad = {}
 # for clave, valor in estudios_popularidad.items():
